@@ -32,17 +32,14 @@ set state..
 https://stackoverflow.com/questions/52844028/using-setstate-to-change-multiple-values-within-an-array-of-objects-reactjs
 https://dev.to/torianne02/why-do-we-use-this-setstate-432o 
 
-
 set State:
 this.setState((state, props) => {
   return {counter: state.counter + props.step};
 });
 https://legacy.reactjs.org/docs/react-component.html
 
-
 https://www.reddit.com/r/learnreactjs/comments/agdziy/explain_to_me_how_componentdidmount_works/
 The setIneterval is kicked off in that function, and setInterval works gets continuously called. each time the setState function runs, the state is updated and the render method is called again (hence the componentDidUpdate function continuously getting called)
-
 
 React re-renders all components every time setState is called
 https://stackoverflow.com/questions/24718709/reactjs-does-render-get-called-any-time-setstate-is-called

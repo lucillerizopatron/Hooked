@@ -113,8 +113,17 @@ function Login(){
                 <button 
                     className = "secondary-login-button"
                     onClick={() => setShowPassword(!showPassword)}
-                    onMouseEnter={(e) => { e.target.style.backgroundColor = 'rgba(222, 191, 247, 0.2)' }}
-                    onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent' }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = "rgba(222, 191, 247, 0.2)";
+                        e.currentTarget.style.transform = "translateY(-3px) scale(1.02)";
+                        e.currentTarget.style.boxShadow =
+                            "0 0 12px rgba(222, 191, 247, 0.65), 0 0 24px rgba(124, 196, 255, 0.4)";
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = "transparent";
+                        e.currentTarget.style.transform = "translateY(0) scale(1)";
+                        e.currentTarget.style.boxShadow = "none";
+                    }}
                 >
                     {showPassword ? "Hide Password" : "Show Password"}
                 </button>
@@ -122,8 +131,17 @@ function Login(){
                 <button 
                     className = "login-button"
                     onClick={() => handleDone(username, password)}
-                    onMouseEnter={(e) => { e.target.style.backgroundColor = '#cdbfea' }}
-                    onMouseLeave={(e) => { e.target.style.backgroundColor = '#debff7' }}
+                    onMouseEnter={(e) => {
+                        e.target.style.backgroundColor = '#bfdfea'
+                        e.currentTarget.style.transform = "translateY(-3px) scale(1.02)";
+                        e.currentTarget.style.boxShadow =
+                            "0 0 12px rgba(222, 191, 247, 0.65), 0 0 24px rgba(124, 196, 255, 0.4)";
+                    }}
+                    onMouseLeave={(e) => {
+                        e.target.style.backgroundColor = '#debff7'
+                        e.currentTarget.style.transform = "translateY(0) scale(1)";
+                        e.currentTarget.style.boxShadow = "none";
+                    }}
                 >
                     Login
                 </button>
@@ -133,8 +151,17 @@ function Login(){
                 <button 
                     className = "secondary-login-button"
                     onClick={() => navigate('/forgot-password')}
-                    onMouseEnter={(e) => { e.target.style.backgroundColor = 'rgba(222, 191, 247, 0.2)' }}
-                    onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent' }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = "rgba(222, 191, 247, 0.2)";
+                        e.currentTarget.style.transform = "translateY(-3px) scale(1.02)";
+                        e.currentTarget.style.boxShadow =
+                            "0 0 12px rgba(222, 191, 247, 0.65), 0 0 24px rgba(124, 196, 255, 0.4)";
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = "transparent";
+                        e.currentTarget.style.transform = "translateY(0) scale(1)";
+                        e.currentTarget.style.boxShadow = "none";
+                    }}
                 >
                     Forgot Password?
                 </button>
@@ -142,8 +169,17 @@ function Login(){
                 <button 
                     className = "secondary-login-button"
                     onClick={() => navigate('/forgot-username')}
-                    onMouseEnter={(e) => { e.target.style.backgroundColor = 'rgba(222, 191, 247, 0.2)' }}
-                    onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent' }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = "rgba(222, 191, 247, 0.2)";
+                        e.currentTarget.style.transform = "translateY(-3px) scale(1.02)";
+                        e.currentTarget.style.boxShadow =
+                            "0 0 12px rgba(222, 191, 247, 0.65), 0 0 24px rgba(124, 196, 255, 0.4)";
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = "transparent";
+                        e.currentTarget.style.transform = "translateY(0) scale(1)";
+                        e.currentTarget.style.boxShadow = "none";
+                    }}
                 >
                     Forgot Username?
                 </button>
@@ -151,8 +187,17 @@ function Login(){
                 <button 
                     className = "secondary-login-button"
                     onClick={handleResend}
-                    onMouseEnter={(e) => { e.target.style.backgroundColor = 'rgba(222, 191, 247, 0.2)' }}
-                    onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent' }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = "rgba(222, 191, 247, 0.2)";
+                        e.currentTarget.style.transform = "translateY(-3px) scale(1.02)";
+                        e.currentTarget.style.boxShadow =
+                            "0 0 12px rgba(222, 191, 247, 0.65), 0 0 24px rgba(124, 196, 255, 0.4)";
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = "transparent";
+                        e.currentTarget.style.transform = "translateY(0) scale(1)";
+                        e.currentTarget.style.boxShadow = "none";
+                    }}
                 >
                     Resend Verification Email
                 </button>

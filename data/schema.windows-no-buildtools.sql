@@ -1,4 +1,51 @@
-CREATE EXTENSION IF NOT EXISTS vector;
+-- Alternate schema for machines that can't get the real pgvector extension —
+-- typically Windows without Visual Studio's C++ build tools, which pgvector's
+-- native build requires. Use this INSTEAD of schema.sql, not in addition to it.
+--
+-- It's a byte-for-byte copy of schema.sql, except the "CREATE EXTENSION vector"
+-- line is replaced with a plain SQL/PLpgSQL stand-in: a `vector` domain (really
+-- just `text` underneath) plus the one operator (`<=>`, cosine distance) the
+-- app actually uses. It stores/returns vectors in pgvector's own "[1,2,3]" text
+-- format, so the app's `::text::vector` casts work identically either way — no
+-- app code differs based on which schema file you used.
+
+-- Windows-friendly stand-in for the pgvector extension
+CREATE DOMAIN vector AS text;
+
+CREATE OR REPLACE FUNCTION vector_cosine_distance(a vector, b vector) RETURNS double precision AS $$
+DECLARE
+  va double precision[];
+  vb double precision[];
+  dot double precision := 0;
+  norm_a double precision := 0;
+  norm_b double precision := 0;
+  i int;
+BEGIN
+  IF a IS NULL OR b IS NULL THEN
+    RETURN NULL;
+  END IF;
+  va := string_to_array(trim(both '[]' from a), ',')::double precision[];
+  vb := string_to_array(trim(both '[]' from b), ',')::double precision[];
+  IF array_length(va, 1) IS DISTINCT FROM array_length(vb, 1) THEN
+    RAISE EXCEPTION 'vector dimension mismatch: % vs %', array_length(va,1), array_length(vb,1);
+  END IF;
+  FOR i IN 1..array_length(va, 1) LOOP
+    dot := dot + va[i] * vb[i];
+    norm_a := norm_a + va[i] * va[i];
+    norm_b := norm_b + vb[i] * vb[i];
+  END LOOP;
+  IF norm_a = 0 OR norm_b = 0 THEN
+    RETURN 1;
+  END IF;
+  RETURN 1 - (dot / (sqrt(norm_a) * sqrt(norm_b)));
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
+CREATE OPERATOR <=> (
+  LEFTARG = vector,
+  RIGHTARG = vector,
+  PROCEDURE = vector_cosine_distance
+);
 
 --- stores user data ---
 CREATE TABLE users (
@@ -33,7 +80,7 @@ CREATE TABLE songs (
     album_id INTEGER REFERENCES albums(album_id) ON DELETE CASCADE,
     preview_mp3_url TEXT UNIQUE,
     song_image_url TEXT,
-    feature_vector vector(398)
+    feature_vector vector -- 398 dims, enforced by app code (data/vector_utils.py); our shim domain has no typmod support
 );
 
 --- joins songs to artists ---
@@ -57,7 +104,7 @@ CREATE TABLE interactions (
 --- stores user taste profiles ---
 CREATE TABLE user_profiles (
     user_id INTEGER PRIMARY KEY REFERENCES users(user_id) ON DELETE CASCADE,
-    weight_vector vector(398),
+    weight_vector vector, -- 398 dims, enforced by app code; see note above
     seed_genres JSONB,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

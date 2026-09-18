@@ -63,7 +63,16 @@ function WelcomePage(){
 
                 <div className = "hooked-header-style"
                 style = {{fontSize: '100px'}}>
-                    ♫
+                    <img
+                        src={musicNote2}
+                        alt="♫"
+                        style={{
+                            width: "100px",
+                            height: "100px",
+                            objectFit: "contain",
+                            display: "block",
+                        }}
+                    />
                 </div>
 
                 <div className = "hooked-header-style">

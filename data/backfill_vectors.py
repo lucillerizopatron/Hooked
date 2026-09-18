@@ -1,12 +1,12 @@
 """Backfill feature_vector for songs already in the DB that have NULL vectors."""
 import json
-import psycopg
+from db import get_db
 from vector_utils import build_full_feature_vector, fetch_lyrics, l2_normalize
 import time
 
-DB_URL = "postgresql://hooked_db_user:f8908uzkpULhtEd0IUAscUvJ48BGDTfy@dpg-d799dfn5r7bs73fnjidg-a.oregon-postgres.render.com/hooked_db"
-
-conn = psycopg.connect(DB_URL)
+# Reads DATABASE_URL from .env via db.get_db(), same as the rest of data/*.py.
+# Pass a different DB with: DATABASE_URL="postgresql://..." python backfill_vectors.py
+conn = get_db()
 cur = conn.cursor()
 
 # Get all songs missing feature_vector

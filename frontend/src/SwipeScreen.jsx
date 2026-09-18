@@ -571,12 +571,30 @@ function SwipeScreen() {
                             gap: '45px', 
                             marginTop: '25px'
                         }}>
-                            <button style={actionButtonStyle('#bea2ff', '#1d1133')} 
-                                onClick={() => doSwipe('dislike')}>
+                            <button style={actionButtonStyle('#bea2ff', '#1d1133')}
+                                onClick={() => doSwipe('dislike')}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.transform = "translateY(-4px) scale(1.08)";
+                                    e.currentTarget.style.boxShadow = "0 0 12px rgba(225, 191, 247, 0.85), 0 0 26px rgba(194, 124, 255, 0.65)";
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.transform = "translateY(0) scale(1)";
+                                    e.currentTarget.style.boxShadow = "none";
+                                }}
+                                >
                                 ✕ Skip
                             </button>
-                            <button style={actionButtonStyle('#50fff6', '#1d1133')} 
-                                onClick={() => doSwipe('like')}>
+                            <button style={actionButtonStyle('#50fff6', '#1d1133')}
+                                onClick={() => doSwipe('like')}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.transform = "translateY(-4px) scale(1.08)";
+                                    e.currentTarget.style.boxShadow = "0 0 12px rgba(191, 247, 242, 0.85), 0 0 26px rgba(124, 196, 255, 0.65)";
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.transform = "translateY(0) scale(1)";
+                                    e.currentTarget.style.boxShadow = "none";
+                                }}
+                                >
                                 ♥ Like
                             </button>
                         </div>

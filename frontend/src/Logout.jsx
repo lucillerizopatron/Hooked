@@ -34,15 +34,15 @@ function Logout() {
                 <div style={{
                     position: 'fixed',
                     inset: 0,
-                    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                    backgroundColor: 'rgba(0, 0, 0, 0.26)',
                     zIndex: 999
                 }} />
-                
+
                 {/* Modal Popup */}
                 <div style={{
                     position: 'relative',
                     zIndex: 1000,
-                    backgroundColor: '#1d1133',
+                    backgroundColor: '#2c1a4f38',
                     border: '2px solid #debff7',
                     borderRadius: '20px',
                     padding: '40px 30px',
@@ -116,7 +116,7 @@ function Logout() {
                                 transition: 'all 0.3s ease'
                             }}
                             onMouseEnter={(e) => {
-                                e.target.style.backgroundColor = '#ff5252'
+                                e.target.style.backgroundColor = '#b93535'
                                 e.target.style.borderColor = '#ff5252'
                             }}
                             onMouseLeave={(e) => {

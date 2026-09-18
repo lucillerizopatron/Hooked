@@ -49,5 +49,6 @@ export const actionButtonStyle = (color, textColor) => ({
     borderRadius: '50px',
     cursor: 'pointer',
     backgroundColor: color,
-    color: textColor
+    color: textColor,
+    transition: "transform 0.2s ease",
 })
